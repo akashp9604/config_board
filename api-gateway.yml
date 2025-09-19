@@ -12,9 +12,20 @@ spring:
           enabled: true
           lower-case-service-id: true
 
+      routes:
+        - id: project-service
+          uri: lb://project-service
+          predicates:
+            - Path=/projects/**
+        - id: issue-service
+          uri: lb://issue-service
+          predicates:
+            - Path=/issues/**
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
+
